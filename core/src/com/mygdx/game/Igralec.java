@@ -64,7 +64,7 @@ public class Igralec extends GameObjectDynamic  implements Pool.Poolable{
     }
 
     public void getRandomTopPosition(float width, float height) {
-        this.position.x = MathUtils.random(0, width - Assets.papirImage.getWidth());
+        this.position.x = MathUtils.random(0, width - Assets.igralec_image.getWidth());
         this.position.y = height;
     }
 
@@ -91,7 +91,7 @@ public class Igralec extends GameObjectDynamic  implements Pool.Poolable{
 
     @Override
     public void render(SpriteBatch batch) {
-        batch.draw(Assets.papirImage, position.x, position.y, bounds.width / 2, bounds.height / 2, bounds.width, bounds.height, 1, 1, rotate, 0, 0, (int) bounds.width, (int) bounds.height, false, false);
+        batch.draw(Assets.igralec_image, position.x, position.y, bounds.width / 2, bounds.height / 2, bounds.width, bounds.height, 1, 1, rotate, 0, 0, (int) bounds.width, (int) bounds.height, false, false);
     }
 
 

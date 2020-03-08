@@ -9,7 +9,7 @@ public class Player extends GameObjectDynamic {
 
         public void commandMoveRight() {
             int widthScreen = Gdx.graphics.getWidth();
-            float widthOfGoalie = Assets.kosImage.getWidth();
+            float widthOfGoalie = Assets.PlayerImage.getWidth();
 
             position.x += AstronautsGame.SPEED * Gdx.graphics.getDeltaTime();
             if( position.x > widthScreen - widthOfGoalie ) {
@@ -26,7 +26,7 @@ public class Player extends GameObjectDynamic {
 
     @Override
         public void render(SpriteBatch batch) {
-            batch.draw(Assets.kosImage, position.x,position.y);
+            batch.draw(Assets.PlayerImage, position.x,position.y);
         }
 
         @Override
