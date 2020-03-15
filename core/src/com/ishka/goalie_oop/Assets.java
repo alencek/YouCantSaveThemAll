@@ -17,8 +17,8 @@ public class Assets {
 
 
     public static void Load() {
-        goalieImage = new Texture(Gdx.files.internal("images/gloves64.png"));
-        ballImage = new Texture(Gdx.files.internal("images/ball64.png"));
+        goalieImage = new Texture(Gdx.files.internal("images/icons8-syringe-48.png"));
+        ballImage = new Texture(Gdx.files.internal("images/boy.png"));
         yellowCardImage = new Texture(Gdx.files.internal("images/coronavirus.png"));
 //        crowdSound = Gdx.audio.newSound(Gdx.files.internal("pick.wav"));
         font = new BitmapFont();
