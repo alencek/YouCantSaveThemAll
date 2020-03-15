@@ -88,7 +88,7 @@ public class GoalDefense extends ApplicationAdapter {
 				score.render(batch);
 			}
 			batch.end();
-			create();
+			//create();
 		} else {
 			goalie.update(Gdx.graphics.getDeltaTime());
 			for (GameObjectDynamic act : dynamicActors) {
