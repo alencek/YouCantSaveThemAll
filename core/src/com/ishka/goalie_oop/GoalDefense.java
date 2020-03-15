@@ -64,9 +64,8 @@ public class GoalDefense extends ApplicationAdapter {
 		Ball ball = Ball.ballPool.obtain();
 		ball.init(width, height);
 
-		long nextTime = (long)(10000 * Math.log(passedTime));
-		Ball.setCreateNextInTime(nextTime);
 
+		Ball.setCreateNextInTime(1000);
 		dynamicActors.add(ball);
 
 	}
@@ -74,7 +73,7 @@ public class GoalDefense extends ApplicationAdapter {
 	@Override
 	public void render () {
 		//clear screen
-		Gdx.gl.glClearColor((float)0, 1, (float)0.2, 1);
+		Gdx.gl.glClearColor((float)169, 169, (float)0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		// tell the camera to update its matrices.
 		camera.update();
