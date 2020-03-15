@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.Iterator;
 
@@ -23,6 +24,8 @@ public class GoalDefense extends ApplicationAdapter {
 
 	private Array<GameObjectDynamic> dynamicActors;
 
+	private long gameStartTime;
+	private int passedTime;
 
 
 	@Override
@@ -43,6 +46,8 @@ public class GoalDefense extends ApplicationAdapter {
 
 		dynamicActors = new Array<GameObjectDynamic>();
 
+		gameStartTime = TimeUtils.millis();
+
 		spawnBall();
 		spawnYellowCard();
 	}
@@ -59,7 +64,8 @@ public class GoalDefense extends ApplicationAdapter {
 		Ball ball = Ball.ballPool.obtain();
 		ball.init(width, height);
 
-		Ball.setCreateNextInTime(8000);
+		long nextTime = (long)(10000 * Math.log(passedTime));
+		Ball.setCreateNextInTime(nextTime);
 
 		dynamicActors.add(ball);
 
@@ -80,6 +86,7 @@ public class GoalDefense extends ApplicationAdapter {
 		if( Gdx.input.isKeyPressed(Input.Keys.LEFT) ) goalie.commandMoveLeft();
 		if( Gdx.input.isKeyPressed(Input.Keys.RIGHT) ) goalie.commandMoveRight();
 
+		passedTime = (int)(TimeUtils.timeSinceMillis(gameStartTime) / 5000) + 1;
 
 		if (score.isEnd()) {
 			batch.begin();
@@ -110,7 +117,9 @@ public class GoalDefense extends ApplicationAdapter {
 
 		for (Iterator<GameObjectDynamic> iter = dynamicActors.iterator(); iter.hasNext(); ) {
 			GameObjectDynamic act = iter.next();
-			if (act.bounds.y + act.bounds.height < 0) iter.remove();
+			if (act.bounds.y + act.bounds.height < 0) {
+				iter.remove();
+			}
 			if (act.bounds.overlaps(goalie.bounds)) {
 				score = act.updateScore(score);
 				System.out.println(dynamicActors.size);
