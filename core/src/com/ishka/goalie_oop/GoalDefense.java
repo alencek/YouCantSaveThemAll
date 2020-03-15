@@ -54,12 +54,6 @@ public class GoalDefense extends ApplicationAdapter {
 		CardYellow.setCreateNextInTime(10000);
 	}
 
-	private void spawnRedCard() {
-		CardRed card = new CardRed(0, 0, (int)width, (int)height);
-		card.getRandomTopPosition(width, height);
-		dynamicActors.add(card);
-		CardYellow.setCreateNextInTime(10000);
-	}
 
 	private void spawnBall() {
 		Ball ball = Ball.ballPool.obtain();
