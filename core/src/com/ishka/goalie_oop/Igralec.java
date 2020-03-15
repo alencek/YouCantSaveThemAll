@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
-public class Goalie extends GameObjectDynamic {
-    Goalie(float x, float y, float width, float height) {
+public class Igralec extends GameObjectDynamic {
+    Igralec(float x, float y, float width, float height) {
         super(x, y, width, height);
     }
 

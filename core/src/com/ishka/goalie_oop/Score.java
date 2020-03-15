@@ -20,8 +20,8 @@ public class Score extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        Assets.font.setColor(Color.YELLOW);
-        Assets.font.draw(batch, "" + getGoalsDefendedScore(), bounds.width - 30, bounds.height - 20);
+        Assets.font.setColor(Color.BLUE);
+        Assets.font.draw(batch, "" + getGoalsDefendedScore(), bounds.width - 60, bounds.height - 20);
         Assets.font.setColor(Color.RED);
         Assets.font.draw(batch, "" + getGoalieHealth(), 20,  bounds.height - 20);
     }

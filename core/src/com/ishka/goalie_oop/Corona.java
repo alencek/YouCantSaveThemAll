@@ -4,15 +4,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Pool;
 
-public class CardYellow extends Card implements Pool.Poolable {
-    CardYellow(float x, float y, int width, int height) {
+public class Corona extends Virus implements Pool.Poolable {
+    Corona(float x, float y, int width, int height) {
         super(x, y, width, height);
     }
 
-    public static Pool<CardYellow> yellowCardPool = new Pool<CardYellow>() {
+    public static Pool<Corona> yellowCardPool = new Pool<Corona>() {
         @Override
-        protected CardYellow newObject() {
-            return new CardYellow(0, 0, 64, 64);
+        protected Corona newObject() {
+            return new Corona(0, 0, 64, 64);
         }
     };
 
@@ -29,7 +29,7 @@ public class CardYellow extends Card implements Pool.Poolable {
     }
 
     public static void setCreateNextInTime(long createNextInTime) {
-        Card.createNextInTime = createNextInTime;
+        Virus.createNextInTime = createNextInTime;
     }
 
     @Override

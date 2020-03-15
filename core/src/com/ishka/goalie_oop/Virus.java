@@ -3,13 +3,13 @@ package com.ishka.goalie_oop;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public abstract class Card extends GameObjectDynamic {
+public abstract class Virus extends GameObjectDynamic {
     public static long createNextInTime;
     public long createTime;
 
-    Card(float x, float y, int width, int height) {
+    Virus(float x, float y, int width, int height) {
         super(x, y, width, height);
-//        Card.createNextInTime = createNextInTime;
+//        Virus.createNextInTime = createNextInTime;
 //        this.createTime = createTime;
     }
 

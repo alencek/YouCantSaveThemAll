@@ -1,23 +1,20 @@
 package com.ishka.goalie_oop;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class Ball extends GameObjectDynamic implements Pool.Poolable {
+public class Ljudje extends GameObjectDynamic implements Pool.Poolable {
     public static long createNextInTime;
     public float rotate;
     public float rotateSpeed;
     public boolean defended; // if the goalie has defended the ball
     public boolean active = false;
-    public static Pool<Ball> ballPool = new Pool<Ball>() {
+    public static Pool<Ljudje> ballPool = new Pool<Ljudje>() {
         @Override
-        protected Ball newObject() {
-            return new Ball(0, 0, 64, 64);
+        protected Ljudje newObject() {
+            return new Ljudje(0, 0, 64, 64);
         }
     };
 
@@ -26,10 +23,10 @@ public class Ball extends GameObjectDynamic implements Pool.Poolable {
         ballPool.free(this);
     }
 
-    Ball(float x, float y, int width, int height) {
+    Ljudje(float x, float y, int width, int height) {
         super(x, y, width, height);
 
-        Ball.createNextInTime = 0;
+        Ljudje.createNextInTime = 0;
         this.rotate = rotate;
         this.rotateSpeed = MathUtils.random(-360, 360);
         this.defended = false;

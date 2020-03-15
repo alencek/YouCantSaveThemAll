@@ -9,15 +9,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Logger;
-import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.Iterator;
 
-public class GoalDefense extends ApplicationAdapter {
+public class GameCorona extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
-	private Goalie goalie;
+	private Igralec igralec;
 	private Score score;
 	private EndMsg endMsg;
 	private float width, height;
@@ -42,7 +41,7 @@ public class GoalDefense extends ApplicationAdapter {
 
 		batch = new SpriteBatch();
 
-		goalie = new Goalie(width / 2, 0, Assets.goalieImage.getWidth(), Assets.goalieImage.getHeight());
+		igralec = new Igralec(width / 2, 0, Assets.goalieImage.getWidth(), Assets.goalieImage.getHeight());
 
 		dynamicActors = new Array<GameObjectDynamic>();
 
@@ -53,20 +52,20 @@ public class GoalDefense extends ApplicationAdapter {
 	}
 
 	private void spawnYellowCard() {
-		CardYellow card = CardYellow.yellowCardPool.obtain();
+		Corona card = Corona.yellowCardPool.obtain();
 		card.getRandomTopPosition(width, height);
 		dynamicActors.add(card);
-		CardYellow.setCreateNextInTime(10000);
+		Corona.setCreateNextInTime(10000);
 	}
 
 
 	private void spawnBall() {
-		Ball ball = Ball.ballPool.obtain();
-		ball.init(width, height);
+		Ljudje ljudje = Ljudje.ballPool.obtain();
+		ljudje.init(width, height);
 
 
-		Ball.setCreateNextInTime(1000);
-		dynamicActors.add(ball);
+		Ljudje.setCreateNextInTime(1000);
+		dynamicActors.add(ljudje);
 
 	}
 
@@ -82,8 +81,8 @@ public class GoalDefense extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 		// process user input
 		if( Gdx.input.isTouched() ) commandTouched(new Vector3()); //mouse or touch screen
-		if( Gdx.input.isKeyPressed(Input.Keys.LEFT) ) goalie.commandMoveLeft();
-		if( Gdx.input.isKeyPressed(Input.Keys.RIGHT) ) goalie.commandMoveRight();
+		if( Gdx.input.isKeyPressed(Input.Keys.LEFT) ) igralec.commandMoveLeft();
+		if( Gdx.input.isKeyPressed(Input.Keys.RIGHT) ) igralec.commandMoveRight();
 
 		passedTime = (int)(TimeUtils.timeSinceMillis(gameStartTime) / 5000) + 1;
 
@@ -96,17 +95,17 @@ public class GoalDefense extends ApplicationAdapter {
 			batch.end();
 			//create();
 		} else {
-			goalie.update(Gdx.graphics.getDeltaTime());
+			igralec.update(Gdx.graphics.getDeltaTime());
 			for (GameObjectDynamic act : dynamicActors) {
 				act.update(Gdx.graphics.getDeltaTime());
 			}
 
-			if (Ball.isTimeToCreateNew()) spawnBall();
-			if (CardYellow.isTimeToCreateNew()) spawnYellowCard();
+			if (Ljudje.isTimeToCreateNew()) spawnBall();
+			if (Corona.isTimeToCreateNew()) spawnYellowCard();
 		}
 		batch.begin();
 		{
-			goalie.render(batch);
+			igralec.render(batch);
 			for (GameObjectDynamic act : dynamicActors) {
 				act.render(batch);
 			}
@@ -119,7 +118,7 @@ public class GoalDefense extends ApplicationAdapter {
 			if (act.bounds.y + act.bounds.height < 0) {
 				iter.remove();
 			}
-			if (act.bounds.overlaps(goalie.bounds)) {
+			if (act.bounds.overlaps(igralec.bounds)) {
 				score = act.updateScore(score);
 				System.out.println(dynamicActors.size);
 				iter.remove();
@@ -138,6 +137,6 @@ public class GoalDefense extends ApplicationAdapter {
 	public void commandTouched(Vector3 touchPosition) {
 		touchPosition.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(touchPosition);
-		goalie.position.x = touchPosition.x - Assets.goalieImage.getWidth() / 2;
+		igralec.position.x = touchPosition.x - Assets.goalieImage.getWidth() / 2;
 	}
 }
